@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<html>
+
+<body>
+  <h4>Welcome, {{ name }}</h4>
+  <h4>Add Books</h4>
+  <form method="POST" action="/books">
+    <input type="text" name="title">
+    <input type="submit" value="Add">
+  </form>
+
+  <h1>List of Books added</h1>
+  <p>
+    {% for book in books %}
+  <p>{{book.title}}</p>
+  <form method="POST" action="./update">
+    <input type="hidden" value="{{book.title}}" name="oldtitle">
+    <input type="text" value="{{book.title}}" name="newtitle">
+    <input type="submit" value="Update">
+  </form>
+  <form method="POST" action="./delete">
+    <input type="hidden" value="{{book.title}}" name="title">
+    <input type="submit" value="Delete">
+  </form>
+{% endfor %}
+</p>
+</body>
+
+</html>
+{% endblock %}
